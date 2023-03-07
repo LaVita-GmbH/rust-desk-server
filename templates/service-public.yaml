@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: rust-public-service
 spec:
-  type: {{ .Values.rust-public-service.service.type }}
+  type: {{ .Values.public.service.type }}
   ports:
     - name: "21115"
       port: 21115
