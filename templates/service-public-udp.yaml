@@ -5,7 +5,7 @@ metadata:
 spec:
   type: {{ .Values.public.service.type }}
   ports:
-    - name: 21116
+    - name: "21116"
       port: 21116
       protocol: UDP
       targetPort: 21116
