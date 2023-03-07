@@ -6,7 +6,7 @@ spec:
   replicas: {{ .Values.internal.replicaCount }}
   selector:
     matchLabels:
-      name: rust-internal-service
+      app.kubernetes.io/name: rust-internal-service
   strategy:
     type: Recreate
   template:

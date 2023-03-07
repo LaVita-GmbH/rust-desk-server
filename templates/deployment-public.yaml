@@ -6,7 +6,7 @@ spec:
   replicas: {{ .Values.public.replicaCount }}
   selector:
     matchLabels:
-      name: rust-public-service
+      app.kubernetes.io/name: rust-public-service
   strategy:
     type: Recreate
   template:

@@ -11,4 +11,4 @@ spec:
       port: 21119
       targetPort: 21119
   selector:
-    name: rust-internal-service
+    app.kubernetes.io/name: rust-internal-service
