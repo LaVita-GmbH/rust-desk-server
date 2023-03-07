@@ -4,10 +4,11 @@ metadata:
   name: rust-internal-service-data
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.rust-internal-service.storage }}
+      storage: {{ .Values.internal.storage }}
+  storageClassName: {{ .Values.public.storageClassName }}
 
 ---
 
@@ -17,7 +18,8 @@ metadata:
   name: rust-public-service-data
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.rust-public-service.storage }}
+      storage: {{ .Values.public.storage }}
+  storageClassName: {{ .Values.public.storageClassName }}

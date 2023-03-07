@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: rust-public-service
 spec:
-  replicas: {{ .Values.rust-public-service.replicaCount }}
+  replicas: {{ .Values.public.replicaCount }}
   selector:
     matchLabels:
       name: rust-public-service
@@ -31,7 +31,8 @@ spec:
             - containerPort: 21116
               protocol: UDP
             - containerPort: 21118
-          resources: {}
+          resources:
+            {{- toYaml .Values.public.ressources | nindent 12 }}
           volumeMounts:
             - mountPath: /root
               name: rust-public-service-data

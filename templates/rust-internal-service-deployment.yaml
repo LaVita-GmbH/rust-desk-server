@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: rust-internal-service
 spec:
-  replicas: {{ .Values.rust-public-service.replicaCount }}
+  replicas: {{ .Values.internal.replicaCount }}
   selector:
     matchLabels:
       name: rust-internal-service
@@ -28,7 +28,7 @@ spec:
             - containerPort: 21117
             - containerPort: 21119
           resources:
-            {{- toYaml .Values.rust-internal-service.ressources | nindent 12 }}
+            {{- toYaml .Values.internal.ressources | nindent 12 }}
           volumeMounts:
             - mountPath: /root
               name: rust-internal-service-data

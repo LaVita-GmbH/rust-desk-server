@@ -9,7 +9,7 @@ image:
 
 url: rust.domain.local
 
-rust-public-service:
+public:
   replicaCount: 1
   ressources:
     limits:
@@ -19,7 +19,7 @@ rust-public-service:
     type: LoadBalancer
   storage: 1Gi
 
-rust-internal-service:
+internal:
   replicaCount: 1
   ressources:
     limits:
