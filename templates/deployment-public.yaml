@@ -39,9 +39,9 @@ spec:
             {{- toYaml .Values.public.ressources | nindent 12 }}
           volumeMounts:
             - mountPath: /root
-              name: rust-public-service-data
+              name: rustdesk-data
       restartPolicy: Always
       volumes:
-        - name: rust-public-service-data
+        - name: rustdesk-data
           persistentVolumeClaim:
-            claimName: rust-public-service-data
+            claimName: rustdesk-data

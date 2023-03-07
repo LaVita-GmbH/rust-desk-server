@@ -1,25 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: rust-internal-service-data
+  name: rustdesk-data
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.internal.storage }}
-  storageClassName: {{ .Values.public.storageClassName }}
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: rust-public-service-data
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: {{ .Values.public.storage }}
-  storageClassName: {{ .Values.public.storageClassName }}
+      storage: {{ .Values.data.storage }}
+  storageClassName: {{ .Values.data.storageClassName }}

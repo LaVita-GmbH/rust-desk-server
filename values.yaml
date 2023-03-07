@@ -17,6 +17,8 @@ public:
       memory: 1024Mi
   service:
     type: LoadBalancer
+
+data:
   storage: 1Gi
 
 internal:
@@ -25,4 +27,3 @@ internal:
     limits:
       cpu: 1
       memory: 1024Mi
-  storage: 1Gi
