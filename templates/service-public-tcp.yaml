@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rust-public-service
+  name: rust-public-service-tcp
 spec:
   type: {{ .Values.public.service.type }}
   ports:
