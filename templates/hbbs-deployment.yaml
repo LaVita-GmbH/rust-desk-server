@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hbbs
+  name: rust-public-service
 spec:
-  replicas: {{ .Values.hbbs.replicaCount }}
+  replicas: {{ .Values.rust-public-service.replicaCount }}
   selector:
     matchLabels:
-      name: hbbs
+      name: rust-public-service
   strategy:
     type: Recreate
   template:
@@ -24,7 +24,7 @@ spec:
             - name: PUID
               value: "1024"
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          name: hbbs
+          name: rust-public-service
           ports:
             - containerPort: 21115
             - containerPort: 21116
@@ -34,10 +34,9 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /root
-              name: hbbs-claim0
+              name: rust-public-service-data
       restartPolicy: Always
       volumes:
-        - name: hbbs-claim0
+        - name: rust-public-service-data
           persistentVolumeClaim:
-            claimName: hbbs-claim0
-status: {}
+            claimName: rust-public-service-data

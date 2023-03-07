@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hbbr
+  name: rust-internal-service
 spec:
-  replicas: {{ .Values.hbbs.replicaCount }}
+  replicas: {{ .Values.rust-public-service.replicaCount }}
   selector:
     matchLabels:
-      name: hbbr
+      name: rust-internal-service
   strategy:
     type: Recreate
   template:
@@ -23,18 +23,17 @@ spec:
             - name: PUID
               value: "1024"
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          name: hbbr
+          name: rust-internal-service
           ports:
             - containerPort: 21117
             - containerPort: 21119
           resources:
-            {{- toYaml .Values.hbbr.ressources | nindent 12 }}
+            {{- toYaml .Values.rust-internal-service.ressources | nindent 12 }}
           volumeMounts:
             - mountPath: /root
-              name: hbbr-claim0
+              name: rust-internal-service-data
       restartPolicy: Always
       volumes:
-        - name: hbbr-claim0
+        - name: rust-internal-service-data
           persistentVolumeClaim:
-            claimName: hbbr-claim0
-status: {}
+            claimName: rust-internal-service-data

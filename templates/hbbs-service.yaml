@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hbbs
+  name: rust-public-service
 spec:
-  type: {{ .Values.hbbs.service.type }}
+  type: {{ .Values.rust-public-service.service.type }}
   ports:
     - name: "21115"
       port: 21115
@@ -19,6 +19,4 @@ spec:
       port: 21118
       targetPort: 21118
   selector:
-    io.kompose.service: hbbs
-status:
-  loadBalancer: {}
+    io.kompose.service: rust-public-service
