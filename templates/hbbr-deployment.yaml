@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hbbr
+spec:
+  replicas: {{ .Values.hbbs.replicaCount }}
+  selector:
+    matchLabels:
+      name: hbbr
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - args:
+            - hbbr
+            - -k
+            - _
+          env:
+            - name: PGID
+              value: "100"
+            - name: PUID
+              value: "1024"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: hbbr
+          ports:
+            - containerPort: 21117
+            - containerPort: 21119
+          resources:
+            {{- toYaml .Values.hbbr.ressources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /root
+              name: hbbr-claim0
+      restartPolicy: Always
+      volumes:
+        - name: hbbr-claim0
+          persistentVolumeClaim:
+            claimName: hbbr-claim0
+status: {}

@@ -1,0 +1,35 @@
+# Default values for rust-server-helm
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: rustdesk/rustdesk-server
+  pullPolicy: IfNotPresent
+  tag: "1.1.6"
+
+url: rust.domain.local
+
+hbbs:
+  replicaCount: 1
+  ressources:
+    limits:
+      cpu: 1
+      memory: 1024Mi
+  service:
+    type: LoadBalancer
+  storage: 1Gi
+
+hbbr:
+  replicaCount: 1
+  ressources:
+    limits:
+      cpu: 1
+      memory: 1024Mi
+  storage: 1Gi
+
+
+config:
+  
+
+extraEnvVars: {}
+
