@@ -24,6 +24,7 @@ spec:
             - name: PUID
               value: "1024"
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: rust-public-service
           ports:
             - containerPort: 21115
