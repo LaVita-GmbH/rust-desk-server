@@ -10,6 +10,9 @@ spec:
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: rust-public-service
     spec:
       containers:
         - args:
