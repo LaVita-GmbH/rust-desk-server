@@ -26,10 +26,3 @@ rust-internal-service:
       cpu: 1
       memory: 1024Mi
   storage: 1Gi
-
-
-config:
-  
-
-extraEnvVars: {}
-
