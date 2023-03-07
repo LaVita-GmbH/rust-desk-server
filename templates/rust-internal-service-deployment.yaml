@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-internal-service
+spec:
+  replicas: {{ .Values.rust-public-service.replicaCount }}
+  selector:
+    matchLabels:
+      name: rust-internal-service
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - args:
+            - hbbr
+            - -k
+            - _
+          env:
+            - name: PGID
+              value: "100"
+            - name: PUID
+              value: "1024"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: rust-internal-service
+          ports:
+            - containerPort: 21117
+            - containerPort: 21119
+          resources:
+            {{- toYaml .Values.rust-internal-service.ressources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /root
+              name: rust-internal-service-data
+      restartPolicy: Always
+      volumes:
+        - name: rust-internal-service-data
+          persistentVolumeClaim:
+            claimName: rust-internal-service-data

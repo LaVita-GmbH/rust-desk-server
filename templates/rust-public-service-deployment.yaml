@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-public-service
+spec:
+  replicas: {{ .Values.rust-public-service.replicaCount }}
+  selector:
+    matchLabels:
+      name: rust-public-service
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - args:
+            - hbbs
+            - -r
+            - rust-internal-service.svc:21117
+            - -k
+            - _
+          env:
+            - name: PGID
+              value: "100"
+            - name: PUID
+              value: "1024"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: rust-public-service
+          ports:
+            - containerPort: 21115
+            - containerPort: 21116
+            - containerPort: 21116
+              protocol: UDP
+            - containerPort: 21118
+          resources: {}
+          volumeMounts:
+            - mountPath: /root
+              name: rust-public-service-data
+      restartPolicy: Always
+      volumes:
+        - name: rust-public-service-data
+          persistentVolumeClaim:
+            claimName: rust-public-service-data

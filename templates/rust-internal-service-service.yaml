@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-internal-service
+spec:
+  ports:
+    - name: "21117"
+      port: 21117
+      targetPort: 21117
+    - name: "21119"
+      port: 21119
+      targetPort: 21119
+  selector:
+    name: rust-internal-service
