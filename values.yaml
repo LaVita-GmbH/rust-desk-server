@@ -9,19 +9,20 @@ image:
 
 url: rust.domain.local
 
-public:
+hbbs:
   replicaCount: 1
   ressources:
     limits:
       cpu: 1
       memory: 1024Mi
-  service:
-    type: LoadBalancer
+
+service:
+  type: LoadBalancer
 
 data:
   storage: 1Gi
 
-internal:
+hbbr:
   replicaCount: 1
   ressources:
     limits:

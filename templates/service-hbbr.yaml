@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rust-internal-service
+  name: rust-hbbr-service
 spec:
   ports:
+  type: {{ .Values.service.type }}
     - name: "21117"
       port: 21117
       targetPort: 21117
@@ -11,4 +12,4 @@ spec:
       port: 21119
       targetPort: 21119
   selector:
-    app.kubernetes.io/name: rust-internal-service
+    app.kubernetes.io/name: rust-hbbr-service
